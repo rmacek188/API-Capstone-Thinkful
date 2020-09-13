@@ -1,0 +1,25 @@
+body {
+  text-align: center;
+  align-content: center;
+  margin-top: 20%;
+  background-color:tomato;
+  font-family: monospace;
+  text-size-adjust: 15px;
+
+}
+
+input {
+    margin: 10px;
+    align-content: center;
+    
+}
+
+h2 {
+  text-align: center;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  text-align: center;
+}
