@@ -1,5 +1,6 @@
 'use strict';
 
+
 function watchSubmit() {
   $(".js-search-form").submit(function(event) {
         event.preventDefault();
@@ -42,6 +43,22 @@ function getDataFromApi(artist, title) {
     .catch(err => {
         console.log(err);
     });
+};
+
+  return fetch(`https://lyricfind.com/index.php${artist}/${title}`)
+
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } 
+        throw new Error(response.statusText);
+        
+        })
+        .then(responseJson => displaySearchData(responseJson))
+
+        .catch(err => {
+            console.log(err);
+     });
 };
 
 
