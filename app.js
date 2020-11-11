@@ -34,14 +34,23 @@ function getDataFromApi(artist, title) {
             }
             throw new Error(response.statusText);
         })
-        .then(responseJson => displaySearchData(responseJson))
+        .then(responseJson => {
+          displaySearchData(responseJson)
+          displayFromSecondApi(artist, title)
+        })
 
     
     .catch(err => {
         console.log(err);
     });
 
-    return fetch(`https://lyricfind.com/index.php`)
+    
+    
+     
+};
+
+function displayFromSecondApi(artist, title) {
+  fetch(`https://api.happi.dev/v1/music?q=${title}%20${artist}&limit=&apikey=a79e9aFs21t8SzH6f0NoB5ptt6skNIYeKDArMqb3t4ysqxQ4ErfCGxGz&type=`)
 
     .then(response => {
         if (response.ok) {
@@ -50,13 +59,24 @@ function getDataFromApi(artist, title) {
         throw new Error (response.statusText);
         
         })
-        .then(responseJson => displaySearchData(responseJson))
+        .then(responseJson => displayMore(responseJson.result[0]))
 
         .catch(err => {
             console.log(err);
      });
-};
 
+}
+
+function displayMore(responseJson) {
+  console.log(responseJson);
+
+  
+    if (responseJson.artist == "") {
+      alert("No results");
+    } else {
+      let htmlOutput = "<pre><code>" + responseJson.artist + "</code></pre>";$('#more').html(htmlOutput);
+    }
+}
 
 function displaySearchData(responseJson) {
   console.log(responseJson);
@@ -74,3 +94,4 @@ function displaySearchData(responseJson) {
 
 
 $(watchSubmit);
+
